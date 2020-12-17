@@ -2,14 +2,14 @@ package com.jeiss.market.persistence.entity;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "clientes")
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
     private String nombre;
 
@@ -19,14 +19,17 @@ public class Cliente {
 
     private String direccion;
 
+    @OneToMany(mappedBy = "cliente")
+    private List<Compra> compras;
+
     @Column(name = "correo_electronico")
     private String correoElectronico;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

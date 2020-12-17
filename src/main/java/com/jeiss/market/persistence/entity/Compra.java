@@ -2,7 +2,9 @@ package com.jeiss.market.persistence.entity;
 
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "compras")
@@ -14,16 +16,23 @@ public class Compra {
     private Integer idCompra;
 
     @Column(name = "id_cliente")
-    private Integer idCliente;
+    private String idCliente;
 
-    private Date fecha;
+    private LocalDateTime fecha;
 
     @Column(name = "medio_pago")
-    private Character medioPago;
+    private String medioPago;
 
     private String comentario;
 
-    private Boolean estado;
+    private String estado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente",updatable = false,insertable = false)
+    private Cliente cliente;
+
+    @OneToMany(mappedBy = "producto")
+    private List<ComprasProducto> productos;
 
     public Integer getIdCompra() {
         return idCompra;
@@ -33,27 +42,27 @@ public class Compra {
         this.idCompra = idCompra;
     }
 
-    public Integer getIdCliente() {
+    public String getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Integer idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
 
-    public Date getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 
-    public Character getMedioPago() {
+    public String getMedioPago() {
         return medioPago;
     }
 
-    public void setMedioPago(Character medioPago) {
+    public void setMedioPago(String medioPago) {
         this.medioPago = medioPago;
     }
 
@@ -65,11 +74,11 @@ public class Compra {
         this.comentario = comentario;
     }
 
-    public Boolean getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 }
