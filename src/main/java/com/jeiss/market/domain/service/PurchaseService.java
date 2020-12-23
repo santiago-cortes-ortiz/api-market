@@ -1,8 +1,7 @@
 package com.jeiss.market.domain.service;
 
 import com.jeiss.market.domain.Purchase;
-import com.jeiss.market.domain.repository.PurchaseRespository;
-import com.jeiss.market.persistence.CompraRespository;
+import com.jeiss.market.domain.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ import java.util.Optional;
 public class PurchaseService {
 
     @Autowired
-    private PurchaseRespository purchaseRepository;
+    private PurchaseRepository purchaseRepository;
 
     public List<Purchase> getAll() {
         return purchaseRepository.getAll();

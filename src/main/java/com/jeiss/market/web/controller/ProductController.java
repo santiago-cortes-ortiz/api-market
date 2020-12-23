@@ -2,6 +2,10 @@ package com.jeiss.market.web.controller;
 
 import com.jeiss.market.domain.Product;
 import com.jeiss.market.domain.service.ProductService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +22,19 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/all")
+    @ApiOperation("Get all market products")
+    @ApiResponse( code = 200 , message = "OK")
     public ResponseEntity<List<Product>> getAll(){
         return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> getProduct(@PathVariable("productId") int productId){
+    @ApiOperation("Search a product by a Id product")
+    @ApiResponses({
+            @ApiResponse( code = 200,message = "OK"),
+            @ApiResponse( code = 404, message = "PRODUCT NOT FOUND")
+    })
+    public ResponseEntity<Product> getProduct(@ApiParam( value = "The Id of product" , required = true ,example = "7") @PathVariable("productId") int productId){
         return productService.getProduct(productId)
                 .map(product -> new ResponseEntity<>(product,HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

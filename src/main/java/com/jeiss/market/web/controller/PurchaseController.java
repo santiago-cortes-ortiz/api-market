@@ -23,9 +23,9 @@ public class PurchaseController {
 
     @GetMapping("/client/{idClient}")
     public ResponseEntity<List<Purchase>> getByClient(@PathVariable("idClient") String clientId) {
-        return purchaseService.getByClient(clientId)
-                .map(purchases -> new ResponseEntity<>(purchases, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return purchaseService.getByClient(clientId).map(
+                purchases -> new ResponseEntity<>(purchases, HttpStatus.OK)
+        ).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/save")

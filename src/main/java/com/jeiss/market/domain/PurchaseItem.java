@@ -4,11 +4,8 @@ import java.math.BigDecimal;
 
 public class PurchaseItem {
     private int productId;
-
     private int quantity;
-
-    private BigDecimal total;
-
+    private double total;
     private boolean active;
 
     public int getProductId() {
@@ -27,11 +24,11 @@ public class PurchaseItem {
         this.quantity = quantity;
     }
 
-    public BigDecimal getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(BigDecimal total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
